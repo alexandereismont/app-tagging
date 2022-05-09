@@ -17,6 +17,7 @@ jobs:
           value=`cat training.version.txt`
           echo $value
       - name: Create tag
+        permissions: write-all
         uses: actions/github-script@v6
         with:
           script: |
