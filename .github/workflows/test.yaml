@@ -1,0 +1,28 @@
+name: GitHub Actions Tagging
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs: 
+  Tag-training:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+      - name: Read version
+        run: |
+          git_hash=$(git rev-parse --short "$GITHUB_SHA")
+          echo $git_hash
+          value=`cat training.version.txt`
+          echo $value
+      - name: Create tag
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/t0.0.1',
+              sha: $git_hash
+            })
