@@ -22,9 +22,10 @@ jobs:
         with:
           script: |
             console.log(context)
+            const tag = readFileSync("training.version.txt");
             github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: 'refs/tags/t0.0.1',
+              ref: 'refs/tags/' + tag,
               sha: context.sha
             })
