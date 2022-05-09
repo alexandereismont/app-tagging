@@ -21,8 +21,9 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            const fs = require("fs");
             console.log(context)
-            const tag = readFileSync("training.version.txt");
+            const tag = fs.readFileSync("training.version.txt");
             github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
