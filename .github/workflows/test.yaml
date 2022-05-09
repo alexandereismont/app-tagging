@@ -17,12 +17,7 @@ jobs:
           value=`cat training.version.txt`
           echo $value
       - name: Create tag
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         with:
-          script: |
-            github.rest.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: 'refs/tags/t0.0.1',
-              sha: $git_hash
-            })
+          script: | 
+            console.log(context)
